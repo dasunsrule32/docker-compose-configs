@@ -12,6 +12,13 @@ services:
       - 3000:3000
       - 8443:443
     restart: unless-stopped
+      #    runtime: nvidia
+      #    deploy:
+      #      resources:
+      #        reservations:
+      #          devices:
+      #            - capabilities:
+      #                - gpu
     env_file:
       - .env
 networks: {}
