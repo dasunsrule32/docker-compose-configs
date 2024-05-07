@@ -1,0 +1,16 @@
+services:
+  vaultwarden:
+    container_name: vaultwarden
+    image: vaultwarden/server:latest
+    volumes:
+      - ${DATA_PATH}:/data/
+    restart: unless-stopped
+    ports:
+      - 80:80
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    env_file:
+      - .env
+networks: {}
