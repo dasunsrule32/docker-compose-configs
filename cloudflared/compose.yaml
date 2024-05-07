@@ -1,0 +1,13 @@
+services:
+  cloudflared:
+    container_name: cloudflared
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel run
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    env_file:
+      - .env
+networks: {}
