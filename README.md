@@ -7,7 +7,8 @@ Docker compose configs for popular applications. These configs are known to work
 ---
 Clone this repo to your `/opt/stacks` directory, to clone, just run:
 ```
-cd /opt/stacks && git clone https://github.com/dasunsrule32/docker-compose-configs.git .
+cd /opt/stacks \
+&& git clone https://github.com/dasunsrule32/docker-compose-configs.git .
 ```
 Then click `Scan Stacks Folder` to import the compose files. You can then manage any of the docker apps from within Dockge.
 
@@ -17,7 +18,11 @@ Then click `Scan Stacks Folder` to import the compose files. You can then manage
 ---
 You can run the following command to start it via `docker compose`.
 ```
-mkdir stacks && cd stacks/<app-dir> && docker compose up -d
+mkdir stacks \
+&& cd stacks/ \
+&& git clone https://github.com/dasunsrule32/docker-compose-configs.git . \
+&& cd <app-dir> \
+&& docker compose up -d
 ```
 You can stage the `stacks/` directory where you please.
 
