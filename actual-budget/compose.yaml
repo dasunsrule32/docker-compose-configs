@@ -10,4 +10,6 @@ services:
       resources:
         limits:
           memory: 768M
+    env_file:
+      - .env
 networks: {}
