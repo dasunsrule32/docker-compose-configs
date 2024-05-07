@@ -1,0 +1,13 @@
+services:
+  actual_server:
+    image: docker.io/actualbudget/actual-server:latest
+    ports:
+      - 5006:5006
+    volumes:
+      - ${DATA_PATH}:/data
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 768M
+networks: {}
