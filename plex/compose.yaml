@@ -1,0 +1,20 @@
+services:
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ${CONFIG_PATH}:/config
+      - ${TRANSCODE_PATH}:/transcode
+      - ${MEDIA_PATH}:/data
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities:
+                - gpu
+    env_file:
+      - .env
+networks: {}
