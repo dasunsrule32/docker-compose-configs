@@ -8,13 +8,13 @@ services:
       - ${CONFIG_PATH}:/config
       - ${TRANSCODE_PATH}:/transcode
       - ${MEDIA_PATH}:/data
-    runtime: nvidia
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities:
-                - gpu
+        #    runtime: nvidia
+        #    deploy:
+        #      resources:
+        #        reservations:
+        #          devices:
+        #            - capabilities:
+        #                - gpu
     env_file:
       - .env
 networks: {}
