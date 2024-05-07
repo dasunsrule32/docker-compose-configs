@@ -1,0 +1,31 @@
+# If you have systemd-resolve running, like
+# Debian does by default, you will need to
+# disable it before starting this container.
+# I would recommend running pihole on its
+# own dedicated host. To resolve, do the
+# following:
+#
+# Edit: /etc/systemd/resolved.conf
+#
+# Uncomment: DNSStubListener
+# Set the value to: no
+#
+# Restart systemd-resolvd:
+#
+# systemctl restart systemd-resolved.service
+#
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    volumes:
+      - ${CONFIG_PATH}:/etc/pihole
+      - ${DNSMASQ_CONFIG}:/etc/dnsmasq.d
+    network_mode: host
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    cap_add:
+      - NET_ADMIN # Required if you are using Pi-hole as your DHCP server
+    restart: unless-stopped
+    env_file:
+      - .env
+networks: {}
