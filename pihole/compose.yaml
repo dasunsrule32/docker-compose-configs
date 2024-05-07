@@ -26,6 +26,10 @@ services:
     cap_add:
       - NET_ADMIN # Required if you are using Pi-hole as your DHCP server
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
     env_file:
       - .env
 networks: {}
