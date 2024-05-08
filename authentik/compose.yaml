@@ -1,0 +1,45 @@
+# This config relies on you having redis
+# and postgres stood up on their own.
+# I chose to exclude those from this stack
+# so I can reuse those containers with more
+# than one service easily.
+#
+# This is loosely based on authentik's off-
+# cial compose.yml which you can see here:
+#
+# https://github.com/goauthentik/authentik/blob/main/docker-compose.yml
+#
+services:
+  authentik-server:
+    image: ghcr.io/goauthentik/server:latest
+    container_name: authentik-server
+    restart: unless-stopped
+    command: server
+    ports:
+      - ${COMPOSE_PORT_HTTP:-9000}:9000
+      - ${COMPOSE_PORT_HTTPS:-9443}:9443
+    volumes:
+      - ${MEDIA_PATH}:/media
+      - ${TEMPLATE_PATH}:/templates
+    env_file:
+      - .env
+  authentik-worker:
+    image: ghcr.io/goauthentik/server:latest
+    container_name: authentik-worker
+    restart: unless-stopped
+    command: worker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${MEDIA_PATH}:/media
+      - ${CERTS_PATH}:/certs
+      - ${TEMPLATE_PATH}:/templates
+    # `user: root` and the docker socket volume are optional.
+    # See more for the docker socket integration here:
+    # https://goauthentik.io/docs/outposts/integrations/docker
+    # Removing `user: root` also prevents the worker from fixing the permissions
+    # on the mounted folders, so when removing this make sure the folders have the correct UID/GID
+    # (1000:1000 by default)
+    user: root
+    env_file:
+      - .env
+networks: {}
