@@ -9,6 +9,10 @@
 #
 # https://github.com/goauthentik/authentik/blob/main/docker-compose.yml
 #
+# If you choose to use this compose file
+# for authentik, make sure to setup and con-
+# figure redis and postgres as beforehand.
+#
 services:
   authentik-server:
     image: ghcr.io/goauthentik/server:latest
