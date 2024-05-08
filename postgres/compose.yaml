@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: docker.io/library/postgres:latest
+    container_name: postgres
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    volumes:
+      - ${DB_PATH}:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 5s
+    env_file:
+      - .env
+networks: {}
