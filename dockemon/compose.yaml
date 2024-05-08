@@ -1,0 +1,12 @@
+services:
+  dokemon:
+    image: productiveops/dokemon:latest
+    container_name: dokemon
+    restart: unless-stopped
+    ports:
+      - 9090:9090
+    volumes:
+      - ${DATA_PATH}:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    env_file:
+      - .env
