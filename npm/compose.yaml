@@ -10,6 +10,10 @@ services:
     volumes:
       - ${DATA_PATH}:/data
       - ${LETSENCRYPT_PATH}:/etc/letsencrypt
+    deploy:
+      resources:
+        limits:
+          memory: 1G        
     env_file:
       - .env
 networks: {}
