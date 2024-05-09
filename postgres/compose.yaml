@@ -15,6 +15,10 @@ services:
       interval: 30s
       retries: 5
       timeout: 5s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
     env_file:
       - .env
 networks: {}
