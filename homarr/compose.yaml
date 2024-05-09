@@ -4,7 +4,7 @@ services:
     image: ghcr.io/ajnart/homarr:latest
     restart: unless-stopped
     volumes:
-      #- /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
+      #- ${DOCKER_SOCK}:/var/run/docker.sock # Optional, only if you want docker integration
       - ${CONFIG_PATH}:/app/data/configs
       - ${ICON_PATH}:/app/public/icons
       - ${DATA_PATH}:/data
