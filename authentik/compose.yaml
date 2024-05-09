@@ -25,6 +25,10 @@ services:
     volumes:
       - ${MEDIA_PATH}:/media
       - ${TEMPLATE_PATH}:/templates
+    deploy:
+      resources:
+        limits:
+          memory: 1G
     env_file:
       - .env
   authentik-worker:
@@ -44,6 +48,10 @@ services:
     # on the mounted folders, so when removing this make sure the folders have the correct UID/GID
     # (1000:1000 by default)
     user: root
+    deploy:
+      resources:
+        limits:
+          memory: 1G
     env_file:
       - .env
 networks: {}
