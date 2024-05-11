@@ -16,7 +16,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1024M
+          memory: 1G
     env_file:
       - .env
 networks: {}
