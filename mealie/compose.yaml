@@ -1,0 +1,20 @@
+services:
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:latest
+    container_name: mealie
+    volumes:
+      - ${MEALIE_DATA}:/app/data/
+    restart: unless-stopped
+    ports:
+      - 9925:9000
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    env_file:
+      - .env
+x-dockge:
+  urls:
+    - https://mealie.lan.domain.com
+    - https://mealie.domain.com
+networks: {}
