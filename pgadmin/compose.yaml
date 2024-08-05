@@ -2,12 +2,12 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
+    restart: unless-stopped
     ports:
       - 80:80
     volumes:
       - ${DATA_PATH}:/var/lib/pgadmin
         #      - ${CONFIG_PATH}:/pgadmin4/config_local.py # optional for SSO and other configs
-    restart: unless-stopped
     deploy:
       resources:
         limits:

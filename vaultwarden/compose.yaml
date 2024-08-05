@@ -1,10 +1,10 @@
 services:
   vaultwarden:
-    container_name: vaultwarden
     image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
     volumes:
       - ${DATA_PATH}:/data/
-    restart: unless-stopped
     ports:
       - 80:80
     deploy:

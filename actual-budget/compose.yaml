@@ -1,11 +1,12 @@
 services:
   actual_server:
     image: docker.io/actualbudget/actual-server:latest
+    container_name: actual-budget
+    restart: unless-stopped
     ports:
       - 5006:5006
     volumes:
       - ${DATA_PATH}:/data
-    restart: unless-stopped
     deploy:
       resources:
         limits:

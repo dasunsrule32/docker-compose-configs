@@ -2,6 +2,7 @@ services:
   kasm:
     image: lscr.io/linuxserver/kasm:latest
     container_name: kasm
+    restart: unless-stopped
     privileged: true
     volumes:
       - ${DATA_PATH}:/opt
@@ -11,7 +12,6 @@ services:
     ports:
       - 3000:3000
       - 8443:443
-    restart: unless-stopped
       #    runtime: nvidia
       #    deploy:
       #      resources:
