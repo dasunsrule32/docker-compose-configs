@@ -1,0 +1,28 @@
+services:
+  dashy:
+    image: lissy93/dashy:latest
+    container_name: dashy
+    restart: unless-stopped
+    volumes:
+      - ${DASHY_DATA}:/app/user-data
+    ports:
+      - 8080:8080
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - /app/services/healthcheck
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          memory: 3G
+    env_file:
+      - .env
+x-dockge:
+  urls:
+    - https://dashy.lan.domain.com
+networks: {}
