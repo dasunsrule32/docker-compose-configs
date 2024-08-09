@@ -1,0 +1,21 @@
+name: etesync
+services:
+  etesync:
+    image: victorrds/etesync:latest
+    container_name: etesync
+    restart: unless-stopped
+    volumes:
+      - ${DATA_PATH}:/data
+    ports:
+      - 82:3735
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    env_file:
+      - .env
+networks: {}
+x-dockge:
+  urls:
+    - https://etesync.lan.domain.com
+    - https://etesync.domain.com
