@@ -1,0 +1,28 @@
+services:
+  mattermost:
+    image: mattermost/mattermost-team-edition:latest
+    container_name: mattermost
+    restart: unless-stopped
+    ports:
+      - 8065:8065
+      - 8443:8443/udp
+      - 8443:8443/tcp
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 200
+    read_only: ${MATTERMOST_CONTAINER_READONLY}
+    tmpfs:
+      - /tmp
+    volumes:
+      - ${MATTERMOST_CONFIG_PATH}:/mattermost/config
+      - ${MATTERMOST_DATA_PATH}:/mattermost/data
+      - ${MATTERMOST_LOGS_PATH}:/mattermost/logs
+      - ${MATTERMOST_PLUGINS_PATH}:/mattermost/plugins
+      - ${MATTERMOST_CLIENT_PLUGINS_PATH}:/mattermost/client/plugins
+      - ${MATTERMOST_BLEVE_INDEXES_PATH}:/mattermost/bleve-indexes
+    env_file:
+      - .env
+networks: {}
+x-dockge:
+  urls:
+    - https://chat.lan.domain.com
