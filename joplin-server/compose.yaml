@@ -1,0 +1,20 @@
+services:
+  joplin-server:
+    image: joplin/server:latest
+    container_name: joplin-server
+    restart: unless-stopped
+    volumes:
+      - ${DATA_PATH}:/opt/joplin
+    ports:
+      - 22300:22300
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    env_file:
+      - .env
+networks: {}
+x-dockge:
+  urls:
+    - https://joplin.lan.domain.com
+    - https://joplin.domain.com
