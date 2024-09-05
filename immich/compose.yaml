@@ -1,0 +1,46 @@
+services:
+  immich-server:
+    image: ghcr.io/immich-app/immich-server:release
+    container_name: immich-server
+    restart: unless-stopped
+    volumes:
+      - ${UPLOAD_PATH}:/usr/src/app/upload
+      - /etc/localtime:/etc/localtime:ro
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities:
+                - gpu
+                - compute
+                - video
+    env_file:
+      - .env
+    ports:
+      - 2283:3001
+    healthcheck:
+      disable: false
+  immich-ml:
+    image: ghcr.io/immich-app/immich-machine-learning:release-cuda
+    container_name: immich-ml
+    restart: unless-stopped
+    volumes:
+      - ${CACHE_PATH}:/cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities:
+                - gpu
+                - compute
+                - video
+    env_file:
+      - .env
+    healthcheck:
+      disable: false
+networks: {}
+x-dockge:
+  urls:
+    - https://photos.lan.domain.com
+    - https://photos.domain.com

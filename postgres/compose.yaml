@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: docker.io/library/postgres:latest
+    image: tensorchord/pgvecto-rs:pg16-v0.2.0
     container_name: postgres
     restart: unless-stopped
     ports:
