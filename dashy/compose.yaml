@@ -4,7 +4,7 @@ services:
     container_name: dashy
     restart: unless-stopped
     volumes:
-      - ${DASHY_DATA}:/app/user-data
+      - ${DATA_PATH}:/app/user-data
     ports:
       - 8080:8080
     healthcheck:
