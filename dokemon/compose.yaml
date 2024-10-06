@@ -6,7 +6,7 @@ services:
     ports:
       - 9090:9090
     volumes:
-      - ${DATA_PATH}:/data
+      - ${DATA}:/data
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
       - .env
