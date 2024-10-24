@@ -100,7 +100,9 @@ services:
       resources:
         reservations:
           devices:
-            - capabilities:
+            - driver: nvidia
+              count: 1
+              capabilities:
                 - gpu
     env_file:
       - .env

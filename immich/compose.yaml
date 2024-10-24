@@ -11,7 +11,9 @@ services:
       resources:
         reservations:
           devices:
-            - capabilities:
+            - driver: nvidia
+              count: 1
+              capabilities:
                 - gpu
                 - compute
                 - video
@@ -27,11 +29,14 @@ services:
     restart: unless-stopped
     volumes:
       - ${CACHE_PATH}:/cache
+    runtime: nvidia
     deploy:
       resources:
         reservations:
           devices:
-            - capabilities:
+            - driver: nvidia
+              count: 1
+              capabilities:
                 - gpu
                 - compute
                 - video
