@@ -1,0 +1,17 @@
+services:
+  uptime:
+    image: louislam/uptime-kuma:latest
+    container_name: uptime
+    restart: unless-stopped
+    volumes:
+      - ${DATA_PATH}:/app/data
+      - ${DOCKER_SOCK}:/var/run/docker.sock
+    ports:
+      - 3002:3001
+    env_file:
+      - .env
+networks: {}
+x-dockge:
+  urls:
+    - https://uptime.lan.domain.co
+    - https://uptime.domain.co
