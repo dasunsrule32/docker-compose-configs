@@ -8,6 +8,7 @@ services:
       - ${CONFIG_PATH}:/config
       - ${TRANSCODE_PATH}:/transcode
       - ${MEDIA_PATH}:/data
+    runtime: nvidia
     deploy:
       resources:
         reservations:
