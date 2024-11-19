@@ -8,6 +8,8 @@ services:
       - ${CONFIG_PATH}:/config
       - ${TRANSCODE_PATH}:/transcode
       - ${MEDIA_PATH}:/data
+    devices:
+      - /dev/dri:/dev/dri
     runtime: nvidia
     deploy:
       resources:

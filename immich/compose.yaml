@@ -6,6 +6,8 @@ services:
     volumes:
       - ${UPLOAD_PATH}:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
+    devices:
+      - /dev/dri:/dev/dri
     runtime: nvidia
     deploy:
       resources:
@@ -29,6 +31,8 @@ services:
     restart: unless-stopped
     volumes:
       - ${CACHE_PATH}:/cache
+    devices:
+      - /dev/dri:/dev/dri
     runtime: nvidia
     deploy:
       resources:
