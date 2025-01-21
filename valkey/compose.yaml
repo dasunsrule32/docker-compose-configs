@@ -1,0 +1,24 @@
+services:
+  valkey:
+    image: bitnami/valkey:latest
+    container_name: valkey
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+    volumes:
+      - ${DATA_PATH}:/bitnami/valkey/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - valkey-cli ping | grep PONG
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 3s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    env_file:
+      - .env
+networks: {}
