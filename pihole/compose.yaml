@@ -1,4 +1,4 @@
-# If you have systemd-resolve running, like
+# If you have systemd-resolved running, like
 # Debian does by default, you will need to
 # disable it before starting this container.
 # I would recommend running pihole on its
@@ -10,7 +10,7 @@
 # Uncomment: DNSStubListener
 # Set the value to: no
 #
-# Restart systemd-resolvd:
+# Restart systemd-resolved:
 #
 # systemctl restart systemd-resolved.service
 #
