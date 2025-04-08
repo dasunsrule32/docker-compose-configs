@@ -1,0 +1,25 @@
+services:
+  docusaurus:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: docusaurus:latest
+    container_name: docusaurus
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    # Copy files from container to be able to modify them:
+    # cd ${DATA_PATH}/docusaurus
+    # mkdir -v {blog,docs,docusaurus.config.js,sidebars.js,src,static,xfer}
+    # cp -rv {blog,docs,docusaurus.config.js,sidebars.js,src,static} xfer/
+    volumes:
+      - ${DATA_PATH}/docusaurus/docusaurus.config.js:/app/docusaurus.config.js
+      - ${DATA_PATH}/docusaurus/sidebars.js:/app/sidebars.js
+      - ${DATA_PATH}/docusaurus/blog:/app/blog
+      - ${DATA_PATH}/docusaurus/docs:/app/docs
+      - ${DATA_PATH}/docusaurus/static:/app/static
+      - ${DATA_PATH}/docusaurus/src:/app/src
+      - ${DATA_PATH}/docusaurus/xfer:/app/xfer
+    env_file:
+      - .env
+networks: {}
