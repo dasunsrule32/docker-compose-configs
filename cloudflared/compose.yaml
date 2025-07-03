@@ -3,6 +3,8 @@ services:
     image: cloudflare/cloudflared:latest
     container_name: cloudflared
     restart: unless-stopped
+    sysctls:
+      net.ipv4.ping_group_range: 65532 65532
     command: tunnel run
     deploy:
       resources:
