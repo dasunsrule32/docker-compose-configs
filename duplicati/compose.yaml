@@ -1,0 +1,17 @@
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    restart: unless-stopped
+    ports:
+      - 8200:8200
+    volumes:
+      - ${DATA_PATH}/duplicati/config:/config
+      - ${DATA_PATH}:/source/data
+      - ${DB_PATH}:/source/db
+      - ${MEDIA_PATH}:/source/media
+      - ${RESTORE_PATH}:/dest/cloud-restore
+    user: 0:0 # Running within unprivilged lsc container with idmap enabled to get data
+    env_file:
+      - .env
+networks: {}
