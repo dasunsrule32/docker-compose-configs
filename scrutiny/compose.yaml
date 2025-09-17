@@ -1,0 +1,28 @@
+services:
+  scrutiny:
+    image: ghcr.io/analogj/scrutiny:master-web
+    container_name: scrutiny
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    volumes:
+      - ${DATA_PATH}:/opt/scrutiny/config
+    depends_on:
+      - influxdb
+    env_file:
+      - .env
+  influxdb:
+    image: influxdb:2.1-alpine
+    container_name: influxdb
+    restart: unless-stopped
+    ports:
+      - 8086:8086
+    volumes:
+      - ${DB_PATH}/db:/var/lib/influxdb2
+      - ${DB_PATH}/config:/etc/influxdb2
+    env_file:
+      - .env
+networks: {}
+x-dockge:
+  urls:
+    - https://smartmon.domain.com
