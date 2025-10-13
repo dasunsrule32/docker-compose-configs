@@ -1,0 +1,16 @@
+services:
+  semaphore:
+    image: semaphoreui/semaphore:v2.16.18
+    container_name: semaphore
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    volumes:
+      - ${DATA_PATH}:/var/lib/semaphore
+      - ${CONFIG_PATH}:/etc/semaphore
+    env_file:
+      - .env
+networks: {}
+x-dockge:
+  urls:
+    - https://semaphore.domain.co
