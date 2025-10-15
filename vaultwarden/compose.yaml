@@ -3,14 +3,14 @@ services:
     image: vaultwarden/server:latest
     container_name: vaultwarden
     restart: unless-stopped
-    volumes:
-      - ${DATA_PATH}:/data/
     ports:
       - 80:80
+    volumes:
+      - ${DATA_PATH}:/data/
     deploy:
       resources:
         limits:
-          memory: 512M
+          memory: 1G
     env_file:
       - .env
 networks: {}
