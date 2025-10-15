@@ -15,7 +15,7 @@
 #
 services:
   authentik-server:
-    image: ghcr.io/goauthentik/server:latest
+    image: ghcr.io/goauthentik/server:${VERSION}
     container_name: authentik-server
     restart: unless-stopped
     command: server
@@ -32,7 +32,7 @@ services:
     env_file:
       - .env
   authentik-worker:
-    image: ghcr.io/goauthentik/server:latest
+    image: ghcr.io/goauthentik/server:${VERSION}
     container_name: authentik-worker
     restart: unless-stopped
     command: worker
