@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: tensorchord/pgvecto-rs:pg16-v0.2.0
+    image: ghcr.io/immich-app/postgres:16-vectorchord0.4.2
     container_name: postgres
     restart: unless-stopped
     ports:
@@ -15,10 +15,25 @@ services:
       interval: 30s
       retries: 5
       timeout: 5s
+    user: 3000:3000
+    env_file:
+      - .env
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ${DATA_PATH}:/var/lib/pgadmin
+      - ${CONFIG_PATH}:/pgadmin4/config_local.py
     deploy:
       resources:
         limits:
           memory: 1G
+    depends_on:
+      postgres:
+        condition: service_healthy
     env_file:
       - .env
 networks: {}
