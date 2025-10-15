@@ -1,6 +1,6 @@
 services:
   valkey:
-    image: bitnami/valkey:latest
+    image: bitnamisecure/valkey:latest
     container_name: valkey
     restart: unless-stopped
     ports:
