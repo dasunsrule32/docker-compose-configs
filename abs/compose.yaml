@@ -1,0 +1,16 @@
+services:
+  abs:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: abs
+    restart: unless-stopped
+    ports:
+      - 13378:80
+    volumes:
+      - ${MEDIA_PATH}/plex/books:/data/books
+      - ${MEDIA_PATH}/plex/podcasts:/data/podcasts
+      - ${DATA_PATH}/abs:/config
+      - ${DATA_PATH}/abs/metadata:/metadata
+    user: 1000:1000
+    env_file:
+      - .env
+networks: {}
