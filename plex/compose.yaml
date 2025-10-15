@@ -1,6 +1,6 @@
 services:
   plex:
-    image: plexinc/pms-docker
+    image: plexinc/pms-docker:latest
     container_name: plex
     restart: unless-stopped
     network_mode: host
@@ -8,9 +8,6 @@ services:
       - ${CONFIG_PATH}:/config
       - ${TRANSCODE_PATH}:/transcode
       - ${MEDIA_PATH}:/data
-    devices:
-      - /dev/dri:/dev/dri
-    runtime: nvidia
     deploy:
       resources:
         reservations:
@@ -19,6 +16,9 @@ services:
               count: 1
               capabilities:
                 - gpu
+                - compute
+                - utility
+                - video
     env_file:
       - .env
 networks: {}
