@@ -7,13 +7,19 @@ services:
       - 80:80
       - 81:81
       - 443:443
+    healthcheck:
+      test:
+        - CMD
+        - /usr/bin/check-health
+      interval: 10s
+      timeout: 3s
     volumes:
       - ${DATA_PATH}:/data
       - ${LETSENCRYPT_PATH}:/etc/letsencrypt
     deploy:
       resources:
         limits:
-          memory: 1G        
+          memory: 1G
     env_file:
       - .env
 networks: {}
