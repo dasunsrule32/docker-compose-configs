@@ -11,7 +11,7 @@ services:
       - ${DB_PATH}:/source/db
       - ${MEDIA_PATH}:/source/media
       - ${RESTORE_PATH}:/dest/cloud-restore
-    user: 0:0 # Running within unprivilged lsc container with idmap enabled to get data
+    user: 0:0 # Running within unprivilged lxc container with idmap enabled to get data
     env_file:
       - .env
 networks: {}
