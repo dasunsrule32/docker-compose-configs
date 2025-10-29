@@ -1,6 +1,6 @@
 services:
   semaphore:
-    image: semaphoreui/semaphore:v2.16.18
+    image: semaphoreui/semaphore:latest
     container_name: semaphore
     restart: unless-stopped
     ports:
