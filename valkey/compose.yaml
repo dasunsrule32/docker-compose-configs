@@ -1,12 +1,12 @@
 services:
   valkey:
-    image: bitnamisecure/valkey:latest
+    image: valkey/valkey:8
     container_name: valkey
     restart: unless-stopped
     ports:
       - 6379:6379
     volumes:
-      - ${DATA_PATH}:/bitnami/valkey/data
+      - ${DATA_PATH}:/data
     healthcheck:
       test:
         - CMD-SHELL
