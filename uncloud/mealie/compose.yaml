@@ -1,0 +1,13 @@
+services:
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:latest
+    env_file:
+      - .env
+    volumes:
+      - ${MEALIE_DATA}:/app/data/
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    x-ports:
+      - recipes.domain.com:9000/https
