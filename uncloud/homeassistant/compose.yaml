@@ -1,0 +1,18 @@
+services:
+  ha:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    env_file:
+      - .env
+    volumes:
+      - ${CONFIG_PATH}:/config
+    #      - /etc/localtime:/etc/localtime:ro
+    #      - /run/dbus:/run/dbus:ro
+    #    privileged: true
+    network_mode: host
+    user: 3568:3568
+    x-ports:
+      - ha.domain.com:8123/https
+    deploy:
+      resources:
+        limits:
+          memory: 4G
