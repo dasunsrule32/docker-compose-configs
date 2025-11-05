@@ -1,0 +1,15 @@
+services:
+  actual-budget:
+    image: docker.io/actualbudget/actual-server:latest
+    container_name: actual-budget
+    env_file:
+      - .env
+    volumes:
+      - ${DATA_PATH}:/data
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    user: 3568:3568
+    x-ports:
+      - budget.domain.com:5006/https
