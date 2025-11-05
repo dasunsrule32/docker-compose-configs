@@ -3,7 +3,7 @@
   email {env.EMAIL}
 }
 
-{env.WILDCARD_LIST} {
+*.domain.com, *.apps.domain.com, domain.com {
   tls {
     dns cloudflare {env.CLOUDFLARE_API_TOKEN}
     resolvers 1.1.1.1
