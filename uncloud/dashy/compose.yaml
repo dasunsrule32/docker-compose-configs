@@ -1,0 +1,22 @@
+services:
+  dashy:
+    image: lissy93/dashy:latest
+    env_file:
+      - .env
+    volumes:
+      - ${DATA_PATH}:/app/user-data
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - /app/services/healthcheck
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    x-ports:
+      - dash.domain.com:8080/https
+    deploy:
+      resources:
+        limits:
+          memory: 3G
