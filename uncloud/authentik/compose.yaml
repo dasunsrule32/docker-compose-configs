@@ -1,0 +1,63 @@
+# This config relies on you having redis
+# and postgres stood up on their own.
+# I chose to exclude those from this stack
+# so I can reuse those containers with more
+# than one service easily.
+#
+# This is loosely based on authentik's off-
+# cial compose.yml which you can see here:
+#
+# https://github.com/goauthentik/authentik/blob/main/docker-compose.yml
+#
+# If you choose to use this compose file
+# for authentik, make sure to setup and 
+# postgres as beforehand.
+#
+services:
+  ak-server:
+    image: ghcr.io/goauthentik/server:${VERSION}
+    command: server
+    env_file:
+      - .env
+    volumes:
+      - ${MEDIA_PATH}:/media
+      - ${TEMPLATE_PATH}:/templates
+    x-ports:
+      - auth.domain.com:9443/https
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+  ak-worker:
+    image: ghcr.io/goauthentik/server:${VERSION}
+    command: worker
+    env_file:
+      - .env
+    volumes:
+      - ${DOCKER_SOCK}:/var/run/docker.sock
+      - ${MEDIA_PATH}:/media
+      - ${CERTS_PATH}:/certs
+      - ${TEMPLATE_PATH}:/templates
+    # `user: root` and the docker socket volume are optional.
+    # See more for the docker socket integration here:
+    # https://goauthentik.io/docs/outposts/integrations/docker
+    # Removing `user: root` also prevents the worker from fixing the permissions
+    # on the mounted folders, so when removing this make sure the folders have the correct UID/GID
+    # (1000:1000 by default)
+    user: root
+    deploy:
+      resources:
+        limits:
+          memory: 3G
+  ak-ldap-outpost:
+    image: ghcr.io/goauthentik/ldap:${VERSION}
+    env_file:
+      - .env
+    depends_on:
+      ak-server:
+        condition: service_healthy
+      ak-worker:
+        condition: service_healthy
+    x-ports:
+      - 389:3389/tcp@host
+      - 636:6636/tcp@host
