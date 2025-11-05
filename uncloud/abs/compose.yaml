@@ -1,0 +1,14 @@
+services:
+  abs:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: abs
+    env_file:
+      - .env
+    volumes:
+      - ${MEDIA_PATH}/plex/books:/data/books
+      - ${MEDIA_PATH}/plex/podcasts:/data/podcasts
+      - ${DATA_PATH}/abs:/config
+      - ${DATA_PATH}/abs/metadata:/metadata
+    user: 1000:1000
+    x-ports:
+      - abs.domain.com:80/https
