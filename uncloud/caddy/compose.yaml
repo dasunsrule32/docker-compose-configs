@@ -1,7 +1,6 @@
 services:
   caddy:
     image: ghcr.io/caddybuilds/caddy-cloudflare:latest
-    container_name: caddy
     command: caddy run -c /config/Caddyfile
     env_file:
       - .env

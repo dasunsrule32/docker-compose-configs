@@ -1,7 +1,6 @@
 services:
   actual-budget:
     image: docker.io/actualbudget/actual-server:latest
-    container_name: actual-budget
     env_file:
       - .env
     volumes:

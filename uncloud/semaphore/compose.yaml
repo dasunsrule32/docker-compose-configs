@@ -1,7 +1,6 @@
 services:
   semaphore:
     image: semaphoreui/semaphore:latest
-    container_name: semaphore
     env_file:
       - .env
     volumes:

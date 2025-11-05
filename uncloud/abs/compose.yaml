@@ -1,7 +1,6 @@
 services:
   abs:
     image: ghcr.io/advplyr/audiobookshelf:latest
-    container_name: abs
     env_file:
       - .env
     volumes:
