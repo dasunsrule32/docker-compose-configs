@@ -1,0 +1,12 @@
+services:
+  drawio:
+    image: jgraph/drawio:latest
+    container_name: drawio
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+    env_file:
+      - .env
+    x-ports:
+      - draw.domain.com:8080/https
