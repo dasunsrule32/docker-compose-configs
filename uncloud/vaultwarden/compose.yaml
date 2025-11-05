@@ -1,0 +1,14 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    env_file:
+      - .env
+    volumes:
+      - ${DATA_PATH}:/data/
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    x-ports:
+      - vault.domain.co:80/https
