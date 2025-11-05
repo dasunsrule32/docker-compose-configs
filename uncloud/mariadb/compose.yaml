@@ -1,0 +1,30 @@
+services:
+  mariadb:
+    image: mariadb:lts
+    env_file:
+      - .env
+    volumes:
+      - ${DB_PATH}:/var/lib/mysql
+      - ${DATA_PATH}:/etc/mysql/conf.d/
+    healthcheck:
+      test:
+        - CMD
+        - healthcheck.sh
+        - --connect
+        - --innodb_initialized
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    user: 3999:3999
+  phpmyadmin:
+    image: phpmyadmin:latest
+    env_file:
+      - .env
+    volumes:
+      - ${PMA_THEMES}/boodark-nord:/var/www/html/themes/boodark-nord
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    x-ports:
+      - phpmyadmin.domain.com:80/https
