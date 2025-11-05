@@ -1,0 +1,17 @@
+services:
+  caddy:
+    image: ghcr.io/caddybuilds/caddy-cloudflare:latest
+    container_name: caddy
+    command: caddy run -c /config/Caddyfile
+    env_file:
+      - .env
+    volumes:
+      - ${DATA_PATH}:/data
+      - ${DATA_PATH}:/config
+      - ${RUN_PATH}:/run/caddy
+    x-ports:
+      - 80:80@host
+      - 443:443@host
+    x-caddy: Caddyfile
+    deploy:
+      mode: global
