@@ -3,9 +3,9 @@ services:
     image: jgraph/drawio:latest
     env_file:
       - .env
-    x-ports:
-      - draw.domain.com:8080/https
     deploy:
       resources:
         limits:
           memory: 2G
+    x-ports:
+      - draw.domain.com:8080/https

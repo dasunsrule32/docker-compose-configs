@@ -5,9 +5,9 @@ services:
       - .env
     volumes:
       - ${DATA_PATH}:/data/
-    x-ports:
-      - vault.domain.co:80/https
     deploy:
       resources:
         limits:
           memory: 1G
+    x-ports:
+      - vault.domain.co:80/https

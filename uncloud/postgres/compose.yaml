@@ -25,9 +25,9 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    x-ports:
-      - pgadmin.domain.com:80/https
     deploy:
       resources:
         limits:
           memory: 1G
+    x-ports:
+      - pgadmin.domain.com:80/https

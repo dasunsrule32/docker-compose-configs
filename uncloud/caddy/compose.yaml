@@ -8,9 +8,9 @@ services:
       - ${DATA_PATH}:/data
       - ${DATA_PATH}:/config
       - ${RUN_PATH}:/run/caddy
+    deploy:
+      mode: global
     x-ports:
       - 80:80@host
       - 443:443@host
     x-caddy: Caddyfile
-    deploy:
-      mode: global

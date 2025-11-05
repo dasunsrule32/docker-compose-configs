@@ -5,10 +5,10 @@ services:
       - .env
     volumes:
       - ${DATA_PATH}:/data
+    user: 3568:3568
     deploy:
       resources:
         limits:
           memory: 1G
-    user: 3568:3568
     x-ports:
       - budget.domain.com:5006/https

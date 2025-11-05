@@ -6,5 +6,5 @@ services:
     volumes:
       - ${DATA_PATH}:/var/lib/semaphore
       - ${CONFIG_PATH}:/etc/semaphore
-x-ports:
-  - https://semaphore.domain.com:3000/https
+    x-ports:
+      - https://semaphore.domain.com:3000/https

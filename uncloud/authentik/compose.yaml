@@ -22,12 +22,12 @@ services:
     volumes:
       - ${MEDIA_PATH}:/media
       - ${TEMPLATE_PATH}:/templates
-    x-ports:
-      - auth.domain.com:9443/https
     deploy:
       resources:
         limits:
           memory: 2G
+    x-ports:
+      - auth.domain.com:9443/https
   ak-worker:
     image: ghcr.io/goauthentik/server:${VERSION}
     command: worker

@@ -14,9 +14,9 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
-    x-ports:
-      - dash.domain.com:8080/https
     deploy:
       resources:
         limits:
           memory: 3G
+    x-ports:
+      - dash.domain.com:8080/https
