@@ -1,0 +1,35 @@
+services:
+  postgres:
+    image: ghcr.io/immich-app/postgres:17-vectorchord0.4.3
+    container_name: postgres
+    env_file:
+      - .env
+    volumes:
+      - ${DB_PATH}/pg17:/var/lib/postgresql/data
+      - ${DB_PATH}/pg-bu:/pg-bu
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 5s
+    user: 3000:3000
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    env_file:
+      - .env
+    volumes:
+      - ${DATA_PATH}:/var/lib/pgadmin
+      - ${CONFIG_PATH}:/pgadmin4/config_local.py
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    depends_on:
+      postgres:
+        condition: service_healthy
+    x-ports:
+      - pgadmin.domain.com:80/https
