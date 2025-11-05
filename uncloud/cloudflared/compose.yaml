@@ -1,0 +1,12 @@
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    command: tunnel run
+    sysctls:
+      net.ipv4.ping_group_range: "65532 65532"
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          memory: 128M
