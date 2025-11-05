@@ -1,0 +1,13 @@
+services:
+  joplin:
+    image: joplin/server:latest
+    env_file:
+      - .env
+    volumes:
+      - ${DATA_PATH}:/opt/joplin
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    x-ports:
+      - notes.domain.com:22300/https
