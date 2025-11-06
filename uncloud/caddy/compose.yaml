@@ -10,7 +10,7 @@ services:
       - ${RUN_PATH}:/run/caddy
     deploy:
       mode: global
+    x-caddy: Caddyfile
     x-ports:
       - 80:80@host
       - 443:443@host
-    x-caddy: Caddyfile
