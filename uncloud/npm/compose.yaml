@@ -1,0 +1,24 @@
+services:
+  npm:
+    image: docker.io/jc21/nginx-proxy-manager:latest
+    ports:
+      - 80:80
+      - 81:81
+      - 443:443
+    env_file:
+      - .env
+    volumes:
+      - ${DATA_PATH}:/data
+      - ${LETSENCRYPT_PATH}:/etc/letsencrypt
+    healthcheck:
+      test:
+        - CMD
+        - /usr/bin/check-health
+      interval: 10s
+      timeout: 3s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    x-ports:
+      - npm.domain.com:81/https
