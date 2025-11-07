@@ -1,6 +1,6 @@
 services:
   uptime:
-    image: louislam/uptime-kuma:latest
+    image: louislam/uptime-kuma:2
     env_file:
       - .env
     volumes:

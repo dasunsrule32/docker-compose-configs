@@ -1,6 +1,6 @@
 services:
   uptime:
-    image: louislam/uptime-kuma:latest
+    image: louislam/uptime-kuma:2
     container_name: uptime
     restart: unless-stopped
     volumes:
@@ -13,5 +13,4 @@ services:
 networks: {}
 x-dockge:
   urls:
-    - https://uptime.lan.domain.co
     - https://uptime.domain.co
