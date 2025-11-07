@@ -1,0 +1,19 @@
+services:
+  valkey:
+    image: valkey/valkey:8
+    env_file:
+      - .env
+    volumes:
+      - ${DATA_PATH}:/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - valkey-cli ping | grep PONG
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 3s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
