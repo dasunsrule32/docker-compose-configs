@@ -1,0 +1,18 @@
+services:
+  scrutiny:
+    image: ghcr.io/analogj/scrutiny:master-web
+    env_file:
+      - .env
+    volumes:
+      - ${DATA_PATH}:/opt/scrutiny/config
+    depends_on:
+      - influxdb
+    x-port:
+      - smartmon.domain.com:8080/https
+  influxdb:
+    image: influxdb:2.1-alpine
+    env_file:
+      - .env
+    volumes:
+      - ${DB_PATH}/db:/var/lib/influxdb2
+      - ${DB_PATH}/config:/etc/influxdb2
