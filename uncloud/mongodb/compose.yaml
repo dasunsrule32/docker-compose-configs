@@ -1,0 +1,23 @@
+services:
+  mongo:
+    image: mongo:7
+    env_file:
+      - .env
+    volumes:
+      - ${DB_PATH}:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh
+        mongodb://localhost:27017/healthcheck
+      start_period: 10s
+      interval: 30s
+      timeout: 10s
+      retries: 3
+  mongo-express:
+    image: mongo-express
+    env_file:
+      - .env
+    depends_on:
+      mongo:
+        condition: service_healthy
+    x-ports:
+      - mongo.domain.com:8081:https
