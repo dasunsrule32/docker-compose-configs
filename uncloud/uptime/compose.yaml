@@ -1,0 +1,10 @@
+services:
+  uptime:
+    image: louislam/uptime-kuma:latest
+    env_file:
+      - .env
+    volumes:
+      - ${DATA_PATH}:/app/data
+      - ${DOCKER_SOCK}:/var/run/docker.sock
+    x-ports:
+      - uptime.domain.com:3001/https
