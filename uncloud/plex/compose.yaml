@@ -1,0 +1,23 @@
+services:
+  plex:
+    image: plexinc/pms-docker:latest
+    network_mode: host
+    env_file:
+      - .env
+    volumes:
+      - ${CONFIG_PATH}:/config
+      - ${TRANSCODE_PATH}:/transcode
+      - ${MEDIA_PATH}:/data
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities:
+                - gpu
+                - compute
+                - utility
+                - video
+    x-ports:
+      - plex.domain.com:32400/https
