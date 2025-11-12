@@ -1,0 +1,42 @@
+services:
+  immich-server:
+    image: ghcr.io/immich-app/immich-server:release
+    env_file:
+      - .env
+    volumes:
+      - ${UPLOAD_PATH}:/data
+      - /etc/localtime:/etc/localtime:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities:
+                - gpu
+                - compute
+                - utility
+                - video
+    healthcheck:
+      disable: false
+    x-ports:
+      - photos.domain.com:2283/https
+  immich-ml:
+    image: ghcr.io/immich-app/immich-machine-learning:release-cuda
+    env_file:
+      - .env
+    volumes:
+      - ${CACHE_PATH}:/cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities:
+                - gpu
+                - compute
+                - utility
+                - video
+    healthcheck:
+      disable: false
