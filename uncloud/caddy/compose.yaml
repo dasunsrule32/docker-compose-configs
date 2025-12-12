@@ -13,4 +13,5 @@ services:
     x-caddy: Caddyfile
     x-ports:
       - 80:80@host
-      - 443:443@host
+      - 443:443/tcp@host
+      - 443:443/udp@host
