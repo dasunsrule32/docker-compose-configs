@@ -1,0 +1,29 @@
+services:
+  ollama:
+    image: ollama/ollama
+    env_file:
+      - .env
+    volumes:
+      - ${DATA_PATH}/ollama:/root/.ollama
+      - ${MODEL_PATH}:/root/.ollama/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities:
+                - gpu
+                - compute
+                - utility
+                - video
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    env_file:
+      - .env
+    volumes:
+      - ${DATA_PATH}/open-webui:/app/backend/data
+    depends_on:
+      - ollama
+    x-ports:
+      - ai.domain.com:8080/https
