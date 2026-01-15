@@ -14,11 +14,7 @@ services:
           devices:
             - driver: nvidia
               count: 1
-              capabilities:
-                - gpu
-                - compute
-                - utility
-                - video
+              capabilities: [all]
     env_file:
       - .env
 networks: {}

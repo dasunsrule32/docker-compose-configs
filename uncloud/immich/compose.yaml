@@ -12,11 +12,7 @@ services:
           devices:
             - driver: nvidia
               count: 1
-              capabilities:
-                - gpu
-                - compute
-                - utility
-                - video
+              capabilities: [all]
     healthcheck:
       disable: false
     x-ports:
@@ -33,10 +29,6 @@ services:
           devices:
             - driver: nvidia
               count: 1
-              capabilities:
-                - gpu
-                - compute
-                - utility
-                - video
+              capabilities: [all]
     healthcheck:
       disable: false

@@ -14,11 +14,7 @@ services:
           devices:
             - driver: nvidia
               count: 1
-              capabilities:
-                - gpu
-                - compute
-                - utility
-                - video
+              capabilities: [all]
     healthcheck:
       disable: false
     env_file:
@@ -35,11 +31,7 @@ services:
           devices:
             - driver: nvidia
               count: 1
-              capabilities:
-                - gpu
-                - compute
-                - utility
-                - video
+              capabilities: [all]
     healthcheck:
       disable: false
     env_file:

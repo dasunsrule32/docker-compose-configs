@@ -12,11 +12,7 @@ services:
           devices:
             - driver: nvidia
               count: 1
-              capabilities:
-                - gpu
-                - compute
-                - utility
-                - video
+              capabilities: [all]
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
     env_file:

@@ -14,10 +14,6 @@ services:
           devices:
             - driver: nvidia
               count: 1
-              capabilities:
-                - gpu
-                - compute
-                - utility
-                - video
+              capabilities: [all]
     x-ports:
       - plex.domain.com:32400/https
